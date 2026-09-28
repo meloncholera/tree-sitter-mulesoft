@@ -52,8 +52,8 @@ parser.setLanguage(DataWeave);
 ## Releases
 
 The `Release` workflow publishes both grammar crates to crates.io, both unscoped
-packages to npmjs, and `@meloncholic/tree-sitter-dataweave` and
-`@meloncholic/tree-sitter-raml` to GitHub Packages. The workspace root remains private.
+packages to npmjs, and `@meloncholera/tree-sitter-dataweave` and
+`@meloncholera/tree-sitter-raml` to GitHub Packages. The workspace root remains private.
 
 Push an existing release commit as a `vMAJOR.MINOR.PATCH` tag, or run the workflow
 manually with an existing tag. Both grammar Cargo manifests must match the tag's
