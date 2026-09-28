@@ -35,13 +35,13 @@
   "type": "module",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/meloncholic/tree-sitter-mulesoft.git",
+    "url": "git+https://github.com/meloncholera/tree-sitter-mulesoft.git",
     "directory": "dataweave"
   },
   "bugs": {
-    "url": "https://github.com/meloncholic/tree-sitter-mulesoft/issues"
+    "url": "https://github.com/meloncholera/tree-sitter-mulesoft/issues"
   },
-  "homepage": "https://github.com/meloncholic/tree-sitter-mulesoft#readme",
+  "homepage": "https://github.com/meloncholera/tree-sitter-mulesoft#readme",
   "keywords": [
     "parser",
     "dataweave",

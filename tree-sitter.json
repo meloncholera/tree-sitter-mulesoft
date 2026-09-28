@@ -35,7 +35,7 @@
       }
     ],
     "links": {
-      "repository": "git+https://github.com/meloncholic/tree-sitter-mulesoft.git"
+      "repository": "git+https://github.com/meloncholera/tree-sitter-mulesoft.git"
     }
   },
   "bindings": {
