@@ -1,0 +1,38 @@
+{
+  "$schema": "https://tree-sitter.github.io/tree-sitter/assets/schemas/config.schema.json",
+  "grammars": [
+    {
+      "name": "raml",
+      "camelcase": "RAML",
+      "scope": "source.raml",
+      "path": ".",
+      "file-types": [
+        "raml"
+      ],
+      "highlights": [
+        "queries/highlights.scm"
+      ]
+    }
+  ],
+  "metadata": {
+    "version": "0.1.1",
+    "license": "MIT",
+    "description": "RAML grammar for tree-sitter",
+    "authors": [
+      {
+        "name": "M. Reifschneider"
+      }
+    ],
+    "links": {
+      "repository": "git+https://github.com/meloncholera/tree-sitter-mulesoft.git"
+    }
+  },
+  "bindings": {
+    "c": true,
+    "go": false,
+    "node": true,
+    "python": false,
+    "rust": true,
+    "swift": false
+  }
+}

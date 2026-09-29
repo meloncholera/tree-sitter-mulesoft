@@ -23,7 +23,9 @@ for (const [prop, path] of queries) {
       delete binding[prop];
       try {
         binding[prop] = readFileSync(path, "utf8");
-      } catch { }
+      } catch {
+        // The query file is optional; leave the property undefined when it is absent.
+      }
       return binding[prop];
     },
   });

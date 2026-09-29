@@ -17,9 +17,6 @@
 const raml = grammar({
   name: 'raml',
 
-  /* eslint-disable no-multi-spaces */
-  /* eslint-disable indent */
-
   externals: $ => [
     $._eof,
 
@@ -79,9 +76,6 @@ const raml = grammar({
 
     $._err_rec,
   ],
-
-  /* eslint-enable no-multi-spaces */
-  /* eslint-enable indent */
 
   extras: $ => [$.comment],
 
@@ -690,7 +684,7 @@ function global_alias(grammar_json, alias_map) {
   }
   for (const [rule_name, counter] of Object.entries(checklist)) {
     if (counter === 0) {
-      console.warn(`warning: global_alias for ${JSON.stringify(rule_name)} is not used.`);
+      globalThis.console.warn(`warning: global_alias for ${JSON.stringify(rule_name)} is not used.`);
     }
   }
   return new_grammar;
@@ -719,6 +713,7 @@ function recursive_alias(rule, alias_map, checklist) {
         const alias = alias_map[rule.name].name;
         return {type: 'ALIAS', content: rule, named: /[a-z]/i.test(alias), value: alias};
       }
+      return rule;
     case 'BLANK':
     case 'ALIAS':
       return rule;

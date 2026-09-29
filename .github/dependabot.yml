@@ -2,66 +2,36 @@ version: 2
 
 updates:
   - package-ecosystem: cargo
-    directory: /dataweave
+    directories:
+      - /dataweave
+      - /raml
     target-branch: dev
+    versioning-strategy: auto
     schedule:
       interval: weekly
       day: monday
-      time: "09:15"
+      time: "08:30"
       timezone: America/New_York
     open-pull-requests-limit: 2
     rebase-strategy: auto
     commit-message:
       prefix: chore
       include: scope
-    labels: [dependabot, rust]
-
-  - package-ecosystem: cargo
-    directory: /raml
-    target-branch: dev
-    schedule:
-      interval: weekly
-      day: monday
-      time: "09:30"
-      timezone: America/New_York
-    open-pull-requests-limit: 2
-    rebase-strategy: auto
-    commit-message:
-      prefix: chore
-      include: scope
-    labels: [dependabot, rust]
-
-  - package-ecosystem: npm
-    directory: /dataweave
-    target-branch: dev
-    schedule:
-      interval: weekly
-      day: monday
-      time: "09:45"
-      timezone: America/New_York
-    open-pull-requests-limit: 2
-    versioning-strategy: increase-if-necessary
-    rebase-strategy: auto
-    commit-message:
-      prefix: chore
-      include: scope
-    labels: [dependabot, javascript]
-
-  - package-ecosystem: npm
-    directory: /raml
-    target-branch: dev
-    schedule:
-      interval: weekly
-      day: monday
-      time: "10:00"
-      timezone: America/New_York
-    open-pull-requests-limit: 2
-    versioning-strategy: increase-if-necessary
-    rebase-strategy: auto
-    commit-message:
-      prefix: chore
-      include: scope
-    labels: [dependabot, javascript]
+    labels:
+      - dependabot
+      - rust
+    groups:
+      cargo-minor-and-patch:
+        patterns:
+          - '*'
+        update-types:
+          - minor
+          - patch
+      cargo-major:
+        patterns:
+          - '*'
+        update-types:
+          - major
 
   - package-ecosystem: github-actions
     directory: /
@@ -69,11 +39,63 @@ updates:
     schedule:
       interval: weekly
       day: monday
-      time: "10:15"
+      time: "08:45"
       timezone: America/New_York
     open-pull-requests-limit: 2
     rebase-strategy: auto
     commit-message:
       prefix: ci
       include: scope
-    labels: [dependabot, ci]
+    labels:
+      - dependabot
+      - ci
+    groups:
+      github-actions:
+        patterns:
+          - '*'
+        update-types:
+          - minor
+          - patch
+      github-actions-major:
+        patterns:
+          - '*'
+        update-types:
+          - major
+
+  - package-ecosystem: npm
+    directories:
+      - /
+      - /dataweave
+      - /raml
+    target-branch: dev
+    schedule:
+      interval: weekly
+      day: monday
+      time: "09:00"
+      timezone: America/New_York
+    open-pull-requests-limit: 2
+    versioning-strategy: increase-if-necessary
+    rebase-strategy: auto
+    cooldown:
+      default-days: 4
+      semver-major-days: 7
+      semver-minor-days: 4
+      semver-patch-days: 2
+    commit-message:
+      prefix: chore
+      include: scope
+    labels:
+      - dependabot
+      - javascript
+    groups:
+      npm-minor-and-patch:
+        patterns:
+          - '*'
+        update-types:
+          - minor
+          - patch
+      npm-major:
+        patterns:
+          - '*'
+        update-types:
+          - major

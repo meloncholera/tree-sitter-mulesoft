@@ -51,8 +51,8 @@ export default grammar({
     ),
 
     // --- Comments ---
-    line_comment: $ => token(seq('//', /.*/)),
-    block_comment: $ => token(seq('/*', /[^*]*\*+([^/*][^*]*\*+)*/, '/')),
+    line_comment: _ => token(seq('//', /.*/)),
+    block_comment: _ => token(seq('/*', /[^*]*\*+([^/*][^*]*\*+)*/, '/')),
 
     // --- Header and Directives ---
     header: $ => repeat1($._directive),
@@ -73,7 +73,7 @@ export default grammar({
       field('version', $.version_number)
     ),
 
-    version_number: $ => /[0-9]+(\.[0-9]+)*/,
+    version_number: _ => /[0-9]+(\.[0-9]+)*/,
 
     output_directive: $ => seq(
       choice('%output', 'output'),
@@ -88,7 +88,7 @@ export default grammar({
       repeat($.directive_parameter)
     ),
 
-    mime_type: $ => /[a-zA-Z0-9_\.\-]+(\/[a-zA-Z0-9_\.\-\+]+)?/,
+    mime_type: _ => /[a-zA-Z0-9_\.\-]+(\/[a-zA-Z0-9_\.\-\+]+)?/,
 
     directive_parameter: $ => seq(
       field('name', $.identifier),
@@ -127,7 +127,7 @@ export default grammar({
       field('uri', choice($.namespace_uri, $.string, $.identifier))
     ),
 
-    namespace_uri: $ => /[a-zA-Z][a-zA-Z0-9+.-]*:[^\s]+/,
+    namespace_uri: _ => /[a-zA-Z][a-zA-Z0-9+.-]*:[^\s]+/,
 
     qualified_name: $ => seq(
       field('namespace', $.identifier),
@@ -343,17 +343,17 @@ export default grammar({
     ),
 
     // --- Literals ---
-    boolean: $ => choice('true', 'false'),
-    null: $ => 'null',
+    boolean: _ => choice('true', 'false'),
+    null: _ => 'null',
 
-    number: $ => token(choice(
+    number: _ => token(choice(
       /0x[0-9a-fA-F]+/,
       /-?[0-9]+(\.[0-9]+)?([eE][+-]?[0-9]+)?/
     )),
 
-    regex: $ => token(seq('/', /([^/\\]|\\.)*/, '/', optional(/[gimsuy]+/))),
+    regex: _ => token(seq('/', /([^/\\]|\\.)*/, '/', optional(/[gimsuy]+/))),
 
-    date_time: $ => token(seq('|', /[^|\r\n]+/, '|')),
+    date_time: _ => token(seq('|', /[^|\r\n]+/, '|')),
 
     // --- Strings & Interpolation ---
     string: $ => choice(
@@ -393,15 +393,15 @@ export default grammar({
       '"""'
     ),
 
-    string_content: $ => token.immediate(prec(1, /[^"\\$]+/)),
-    single_quote_content: $ => token.immediate(prec(1, /[^'\\]+/)),
-    triple_quote_content: $ => token.immediate(choice(/[^"\\$]+/, '"', '""')),
-    escape_sequence: $ => token.immediate(seq('\\', /./)),
+    string_content: _ => token.immediate(prec(1, /[^"\\$]+/)),
+    single_quote_content: _ => token.immediate(prec(1, /[^'\\]+/)),
+    triple_quote_content: _ => token.immediate(choice(/[^"\\$]+/, '"', '""')),
+    escape_sequence: _ => token.immediate(seq('\\', /./)),
     interpolation: $ => seq('$(', field('expression', $._expression), ')'),
 
     // --- Identifiers ---
-    identifier: $ => /[a-zA-Z_][a-zA-Z0-9_]*/,
-    anonymous_parameter: $ => token(/\${1,3}/),
+    identifier: _ => /[a-zA-Z_][a-zA-Z0-9_]*/,
+    anonymous_parameter: _ => token(/\${1,3}/),
 
     parenthesized_expression: $ => seq('(', $._expression, ')'),
 

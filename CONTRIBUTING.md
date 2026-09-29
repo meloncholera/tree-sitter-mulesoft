@@ -31,6 +31,20 @@ cd dataweave && npx --yes --package=tree-sitter-cli@0.27.0 -- tree-sitter test &
 cd ../raml && npx --yes --package=tree-sitter-cli@0.27.0 -- tree-sitter test && node test/generate-node-kinds.mjs
 ```
 
+Lint and format the JavaScript sources (each package's `grammar.js`, `test/*.mjs`, and
+`bindings/node/*.js`). ESLint and Prettier are installed once at the repository root, and the
+Prettier settings live under the `prettier` key of the root `package.json`. The root scripts run
+the matching script in each package, and each package also has its own `lint`, `format`, and
+`format:check` scripts that can be run from inside `dataweave/` or `raml/`. Each package carries
+its own copy of `eslint.config.js` so a package lints the same way standalone as it does from the
+root.
+
+```sh
+npm run lint
+npm run format:check
+npm run format
+```
+
 `dataweave/test/corpus/` and `raml/test/corpus/` contain focused tree assertions. The fixtures
 are larger real-shaped samples and must parse without `ERROR` or `MISSING` nodes.
 

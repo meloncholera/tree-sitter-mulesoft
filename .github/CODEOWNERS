@@ -1,14 +1,12 @@
-# Repository ownership. Multiple owners on a line require only one approval;
-# the final matching pattern controls review routing.
+# This is a single-maintainer repository. Code-owner review remains disabled
+# until another maintainer can review changes independently.
 
-# Source grammars, generated parser artifacts, bindings, tests, and docs.
+# Default ownership for grammar source, bindings, documentation, and release files.
 * @meloncholic
 
-# Automation, dependency policy, and security reporting affect the repository
-# control plane and remain explicitly owned as the repository grows.
-/.github/workflows/** @meloncholic
-/.github/dependabot.yml @meloncholic
-/SECURITY.md @meloncholic
+# Automation and dependency policy affect the repository's verification and supply chain.
+/.github/** @meloncholic
 
-# Keep the ownership policy itself under maintainer review.
+# Ownership rules themselves need maintainer review when the repository gains
+# a second maintainer and code-owner review can be enabled.
 /.github/CODEOWNERS @meloncholic
