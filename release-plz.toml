@@ -1,0 +1,12 @@
+[workspace]
+git_only = true
+publish = false
+semver_check = true
+
+[[package]]
+name = "tree-sitter-dataweave"
+git_tag_name = "v{{ version }}"
+
+[[package]]
+name = "tree-sitter-raml"
+git_tag_name = "v{{ version }}"
