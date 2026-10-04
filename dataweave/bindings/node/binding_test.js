@@ -1,10 +1,10 @@
-import assert from "node:assert";
-import { test } from "node:test";
-import Parser from "tree-sitter";
+import assert from 'node:assert';
+import { test } from 'node:test';
+import Parser from 'tree-sitter';
 
-test("can load grammar and parse a document", async () => {
+test('can load grammar and parse a document', async () => {
   const parser = new Parser();
-  const { default: language } = await import("./index.js");
+  const { default: language } = await import('./index.js');
   parser.setLanguage(language);
   const tree = parser.parse('%dw 2.0\noutput application/json\n---\n{ message: "hello" }');
   assert.equal(tree.rootNode.hasError, false);
@@ -14,7 +14,7 @@ test("can load grammar and parse a document", async () => {
   assert.doesNotThrow(() => new Parser.Query(language, language.HIGHLIGHTS_QUERY));
 });
 
-test("exports the dataweave language name", async () => {
-  const { default: language } = await import("./index.js");
-  assert.equal(language.name, "dataweave");
+test('exports the dataweave language name', async () => {
+  const { default: language } = await import('./index.js');
+  assert.equal(language.name, 'dataweave');
 });

@@ -1,22 +1,11 @@
 {
+  "$schema": "https://tree-sitter.github.io/tree-sitter/assets/schemas/config.schema.json",
   "grammars": [
-    {
-      "name": "dataweave",
-      "camelcase": "DataWeave",
-      "scope": "source.dwl",
-      "path": "dataweave",
-      "file-types": [
-        "dwl"
-      ],
-      "highlights": [
-        "queries/highlights.scm"
-      ]
-    },
     {
       "name": "raml",
       "camelcase": "RAML",
       "scope": "source.raml",
-      "path": "raml",
+      "path": ".",
       "file-types": [
         "raml"
       ],
@@ -28,7 +17,7 @@
   "metadata": {
     "version": "0.1.1",
     "license": "MIT",
-    "description": "Tree-sitter grammars for MuleSoft DataWeave and RAML",
+    "description": "RAML grammar for tree-sitter",
     "authors": [
       {
         "name": "M. Reifschneider"

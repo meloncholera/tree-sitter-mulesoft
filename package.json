@@ -14,20 +14,32 @@
     "test": "npm run test:dw && npm run test:raml",
     "test:dw": "cd dataweave && tree-sitter test",
     "test:raml": "cd raml && tree-sitter test",
-    "node-kinds": "node dataweave/test/generate-node-kinds.mjs && node raml/test/generate-node-kinds.mjs"
+    "node-kinds": "node dataweave/test/generate-node-kinds.mjs && node raml/test/generate-node-kinds.mjs",
+    "lint": "npm run lint --workspaces",
+    "format": "npm run format --workspaces",
+    "format:check": "npm run format:check --workspaces"
   },
   "author": "M. Reifschneider",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/meloncholic/tree-sitter-mulesoft.git"
+    "url": "git+https://github.com/meloncholera/tree-sitter-mulesoft.git"
   },
   "bugs": {
-    "url": "https://github.com/meloncholic/tree-sitter-mulesoft/issues"
+    "url": "https://github.com/meloncholera/tree-sitter-mulesoft/issues"
   },
-  "homepage": "https://github.com/meloncholic/tree-sitter-mulesoft#readme",
+  "homepage": "https://github.com/meloncholera/tree-sitter-mulesoft#readme",
   "devDependencies": {
+    "@eslint/js": "10.0.1",
+    "eslint": "10.12.0",
+    "prettier": "3.9.9",
     "tree-sitter-cli": "0.27.0"
+  },
+  "prettier": {
+    "tabWidth": 2,
+    "singleQuote": true,
+    "trailingComma": "all",
+    "printWidth": 100
   },
   "type": "module"
 }

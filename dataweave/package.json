@@ -8,7 +8,10 @@
     "install": "node-gyp-build",
     "prestart": "npx --yes --package=tree-sitter-cli@0.27.0 -- tree-sitter build --wasm",
     "start": "npx --yes --package=tree-sitter-cli@0.27.0 -- tree-sitter playground",
-    "test": "node --test bindings/node/*_test.js"
+    "test": "node --test bindings/node/*_test.js",
+    "lint": "eslint grammar.js \"test/*.mjs\" \"bindings/node/*.js\"",
+    "format": "prettier --write grammar.js \"test/*.mjs\" \"bindings/node/*.js\"",
+    "format:check": "prettier --check grammar.js \"test/*.mjs\" \"bindings/node/*.js\""
   },
   "author": "M. Reifschneider",
   "license": "MIT",
@@ -17,7 +20,7 @@
     "node-gyp-build": "4.8.4"
   },
   "devDependencies": {
-    "node-gyp": "13.0.2",
+    "node-gyp": "13.1.0",
     "tree-sitter": "0.25.1"
   },
   "peerDependencies": {
@@ -35,13 +38,13 @@
   "type": "module",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/meloncholic/tree-sitter-mulesoft.git",
+    "url": "git+https://github.com/meloncholera/tree-sitter-mulesoft.git",
     "directory": "dataweave"
   },
   "bugs": {
-    "url": "https://github.com/meloncholic/tree-sitter-mulesoft/issues"
+    "url": "https://github.com/meloncholera/tree-sitter-mulesoft/issues"
   },
-  "homepage": "https://github.com/meloncholic/tree-sitter-mulesoft#readme",
+  "homepage": "https://github.com/meloncholera/tree-sitter-mulesoft#readme",
   "keywords": [
     "parser",
     "dataweave",
@@ -55,6 +58,8 @@
     "bindings/node/*",
     "queries/*",
     "src/**",
+    "prebuilds/**",
+    "tree-sitter.json",
     "NOTICE"
   ],
   "allowScripts": {

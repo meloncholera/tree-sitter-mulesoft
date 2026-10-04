@@ -13,7 +13,8 @@
 #                      Rust bindings (against the tree-sitter version the
 #                      consumers pin, and against the latest), build and test
 #                      the Node bindings, validate the PR title, scan for
-#                      secrets, and lint workflow/YAML files. A final aggregate
+#                      secrets, lint and format-check the JavaScript sources,
+#                      and lint workflow/YAML files. A final aggregate
 #                      job rolls every check up into a single `Verify` status.
 # =============================================================================
 
@@ -151,7 +152,7 @@ jobs:
 
       - name: Upload Gitleaks report on failure
         if: failure()
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
           name: gitleaks-report
           path: gitleaks-report.json
@@ -185,6 +186,11 @@ jobs:
       - name: Install the tree-sitter CLI
         run: npm install --no-save tree-sitter-cli@${{ env.TREE_SITTER_CLI_VERSION }}
 
+      - name: Lint JavaScript sources
+        run: npm run lint
+
+      - name: Check JavaScript formatting
+        run: npm run format:check
 
       - name: Regenerate DataWeave parser from grammar.js
         run: |
@@ -277,7 +283,7 @@ jobs:
             cargo package --list --allow-dirty --package "$package" > "$package-files.txt"
             grep -qx 'src/parser.c' "$package-files.txt"
             grep -qx 'queries/highlights.scm' "$package-files.txt"
-            for required in LICENSE NOTICE README.md bindings/rust/build.rs bindings/rust/lib.rs src/tree_sitter/parser.h; do
+            for required in LICENSE NOTICE README.md tree-sitter.json bindings/rust/build.rs bindings/rust/lib.rs src/tree_sitter/parser.h; do
               grep -Fxq "$required" "$package-files.txt"
             done
             if [ "$package" = tree-sitter-raml ]; then
@@ -307,7 +313,7 @@ jobs:
           for (const pkg of packages) {
             const paths = pkg.files.map((file) => file.path);
             const requiredFiles = ['src/parser.c', 'src/tree_sitter/parser.h', 'queries/highlights.scm',
-              'LICENSE', 'NOTICE', 'README.md', 'package.json', 'binding.gyp',
+              'LICENSE', 'NOTICE', 'README.md', 'package.json', 'tree-sitter.json', 'binding.gyp',
               'bindings/node/index.js', 'bindings/node/index.d.ts', 'bindings/node/binding.cc'];
             if (pkg.name === 'tree-sitter-raml') {
               requiredFiles.push('src/scanner.c', 'src/schema.core.c', 'src/schema.json.c', 'src/schema.legacy.c');
