@@ -31,7 +31,7 @@
   "homepage": "https://github.com/meloncholera/tree-sitter-mulesoft#readme",
   "devDependencies": {
     "@eslint/js": "10.0.1",
-    "eslint": "10.11.0",
+    "eslint": "10.12.0",
     "prettier": "3.9.9",
     "tree-sitter-cli": "0.27.0"
   },
