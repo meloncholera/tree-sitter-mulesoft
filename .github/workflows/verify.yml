@@ -6,6 +6,8 @@
 #  Type                Entrypoint (runs in this repo only)
 #  Triggers            pull_request
 #                      push (dev, main)
+#                      workflow_dispatch (release-plz and sync branches, whose
+#                      GITHUB_TOKEN pushes never start a pull_request run)
 #  Purpose             Regenerate the parsers from grammar.js, fail on any
 #                      drift in the generated parsers or the committed
 #                      node-kind snapshots, run the tree-sitter corpus and
@@ -25,6 +27,7 @@ on:
     types: [opened, synchronize, reopened, edited, ready_for_review, converted_to_draft]
   push:
     branches: [dev, main]
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -497,7 +500,7 @@ jobs:
           PYEOF
 
   ci:
-    name: ${{ github.event_name == 'pull_request' && 'Verify' || 'Verify (push)' }}
+    name: ${{ github.event_name == 'push' && 'Verify (push)' || 'Verify' }}
     needs: [changes, verify, consumer-pin, node-binding, secret-scanning, pr-title, workflow-meta]
     if: always()
     runs-on: ubuntu-latest
